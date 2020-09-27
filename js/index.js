@@ -1,39 +1,44 @@
 const calculatorResultField = document.querySelector(".calculator-result");
 
-document
-  .querySelectorAll(".digits button")
-  .forEach((button) => button.addEventListener("click", digitPressed));
+document.querySelectorAll(".digits button").forEach((button)=>button.addEventListener("click", digitPressed));
 
 function digitPressed(event) {
-  const digit = event.target.innerText;
-  calculatorResultField.value += digit;
+    const digit = event.target.innerText;
+    calculatorResultField.value += digit;
 }
 
-document
-  .querySelectorAll(".opers button")
-  .forEach((button) => button.addEventListener("click", operPressed));
+document.querySelectorAll(".opers button").forEach((button)=>button.addEventListener("click", operPressed));
 
 function operPressed(event) {
-  const oper = event.target.innerText;
-  const resultFieldValue = calculatorResultField.value;
-  const lastSymbol = resultFieldValue[resultFieldValue.length - 1];
-  //calculatorResultField.value += oper;
-  if (lastSymbol === 
+  const lDigit = Number(calculatorResultField.value[calculatorResultField.value.length - 1]);
+  const operator = event.target.innerText;
+  if (isNaN(lDigit)) {
+    console.log(lDigit);
+    calculatorResultField.value = calculatorResultField.value.substring(0, calculatorResultField.value.length - 1);
+  }
+
+  calculatorResultField.value += operator;
 }
 
 document.querySelector(".eq").addEventListener("click", eqPressed);
 
 function eqPressed() {
-  const result = eval(calculatorResultField.value);
-  if (result === Infinity) {
-    alert("Ви не можете ділити на 0");
-  } else {
-    calculatorResultField.value = result;
-  }
+    const result = eval(calculatorResultField.value);
+    if (result === Infinity) {
+        alert("Ви не можете ділити на 0");
+    } else {
+        calculatorResultField.value = result;
+    }
 }
 
-document.querySelector(".cl").addEventListener("click", acPressed);
+document.querySelector(".clean-all").addEventListener("click", acPressed);
 
 function acPressed() {
-  calculatorResultField.value = "";
+    calculatorResultField.value = "";
 }
+
+const clean = document.querySelector(".clean");
+clean.addEventListener("click", ()=>{
+    calculatorResultField.value = calculatorResultField.value.substring(0, calculatorResultField.value.length - 1);
+}
+);
