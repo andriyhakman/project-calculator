@@ -23,12 +23,11 @@ function operPressed(event) {
 document.querySelector(".eq").addEventListener("click", eqPressed);
 
 function eqPressed() {
-    const result = eval(calculatorResultField.value);
+    const result = eval(calculatorResultField.value).toFixed(2);
     if (result === Infinity) {
         alert("Ви не можете ділити на 0");
     } else {
         calculatorResultField.value = result;
-        calculatorResultField.value = `${parseFloat(eval(calculatorResultField.value).toFixed(4))}`;
     }
 }
 
