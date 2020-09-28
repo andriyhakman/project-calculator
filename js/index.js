@@ -10,10 +10,10 @@ function digitPressed(event) {
 document.querySelectorAll(".opers button").forEach((button)=>button.addEventListener("click", operPressed));
 
 function operPressed(event) {
-  const lDigit = Number(calculatorResultField.value[calculatorResultField.value.length - 1]);
+  const lastSymbol = Number(calculatorResultField.value[calculatorResultField.value.length - 1]);
   const operator = event.target.innerText;
-  if (isNaN(lDigit)) {
-    console.log(lDigit);
+  if (isNaN(lastSymbol)) {
+    console.log(lastSymbol);
     calculatorResultField.value = calculatorResultField.value.substring(0, calculatorResultField.value.length - 1);
   }
 
@@ -28,6 +28,7 @@ function eqPressed() {
         alert("Ви не можете ділити на 0");
     } else {
         calculatorResultField.value = result;
+        calculatorResultField.value = `${parseFloat(eval(calculatorResultField.value).toFixed(4))}`;
     }
 }
 
